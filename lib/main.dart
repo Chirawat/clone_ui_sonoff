@@ -49,17 +49,21 @@ class _HomePageState extends State<HomePage> {
           padding: EdgeInsets.symmetric(vertical: 50.0, horizontal: 10.0),
           child: Column(
             children: [
-              Device(),
-              Device(),
-              Device(),
-              Device(),
+              Device(title: 'Front Light', status: 'ON'),
+              Device(title: 'Kitchen Light', status: 'OFF'),
+              Device(title: 'Living Room 1', status: 'OFF'),
+              Device(title: 'Living Room 2', status: 'ON'),
             ],
           ),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         unselectedItemColor: Colors.white,
-        selectedItemColor: Colors.yellow,
+        selectedItemColor: Colors.white,
+        selectedLabelStyle: TextStyle(
+          //fontSize: 24.0,
+          fontWeight: FontWeight.bold
+        ),
         backgroundColor: Color(0xff3d93ff),
         items: [
           BottomNavigationBarItem(
@@ -82,8 +86,12 @@ class _HomePageState extends State<HomePage> {
 }
 
 class Device extends StatelessWidget {
+  final String title;
+  final String status;
   const Device({
     Key? key,
+    required this.title,
+    required this.status
   }) : super(key: key);
 
   @override
@@ -109,7 +117,7 @@ class Device extends StatelessWidget {
                 //color: Colors.blue,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Color(0x7F000000),
+                  color: status=='ON' ? Colors.blue: Colors.grey,
                 ),
                 child: Icon(Icons.power_settings_new),
               ),
@@ -117,7 +125,7 @@ class Device extends StatelessWidget {
                 width: 10.0,
               ),
               Text(
-                'Front Light',
+                title,
                 style: TextStyle(
                     fontWeight: FontWeight.bold, fontSize: 22.0),
               ),
